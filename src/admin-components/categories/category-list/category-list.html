@@ -1,0 +1,42 @@
+<h3>Kategoriler</h3>
+
+<hr>
+
+<table class="table table-bordered table-striped">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Kategori Adı</th>
+      <th>İşlemler</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr>
+      <td>1</td>
+      <td>Sıcak Kahveler</td>
+      <td>
+        <a routerLink="/admin/categories/update/1"
+           class="btn btn-warning btn-sm">
+          Düzenle
+        </a>
+      </td>
+    </tr>
+
+    <tr>
+      <td>2</td>
+      <td>Soğuk Kahveler</td>
+      <td>
+        <a routerLink="/admin/categories/update/2"
+           class="btn btn-warning btn-sm">
+          Düzenle
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<a routerLink="/admin/categories/create"
+   class="btn btn-primary">
+  Yeni Kategori Oluştur
+</a>
