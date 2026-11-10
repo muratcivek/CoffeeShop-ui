@@ -4,7 +4,7 @@ import { User } from './models/user';
 import { Home } from '../ui-components/home/home';
 
 @Component({
-  imports: [RouterOutlet, Home],
+imports: [RouterOutlet],
   selector: 'app-root',
   styleUrl: './app.css',
   templateUrl: './app.html',

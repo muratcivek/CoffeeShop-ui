@@ -1,10 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { CategoryService } from '../../../Services/category-service';
 
 @Component({
-  imports: [RouterLink],
   selector: 'app-category-list',
-  styleUrl: './category-list.css',
+  imports: [RouterLink],
   templateUrl: './category-list.html',
+  styleUrl: './category-list.css'
 })
-export class CategoryList {}
+export class CategoryList {
+  private readonly categoryService = inject(CategoryService);
+
+  readonly categories = toSignal(this.categoryService.getAll(), {
+    initialValue: []
+  });
+}
