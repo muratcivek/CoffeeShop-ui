@@ -2,26 +2,33 @@
 
 <hr>
 
-<div class="card">
-  <div class="card-body">
+@if (category.id) {
+
+  <form (ngSubmit)="onSubmit()">
 
     <div class="mb-3">
       <label class="form-label">Kategori Adı</label>
 
       <input
         type="text"
+        name="name"
+        [(ngModel)]="category.name"
         class="form-control"
-        placeholder="Yeni kategori adını giriniz">
+        required>
     </div>
 
-    <button type="button" class="btn btn-primary me-2">
+    <button type="submit" class="btn btn-success me-2">
       Güncelle
     </button>
 
-    <a routerLink="/admin/categories"
-       class="btn btn-secondary">
+    <a
+      routerLink="/admin/categories"
+      class="btn btn-secondary">
       İptal
     </a>
 
-  </div>
-</div>
+  </form>
+
+} @else {
+  <p>Kategori yükleniyor...</p>
+}

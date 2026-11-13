@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, linkedSignal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CategoryService } from '../../../Services/category-service';
@@ -10,9 +10,26 @@ import { CategoryService } from '../../../Services/category-service';
   styleUrl: './category-list.css'
 })
 export class CategoryList {
+
   private readonly categoryService = inject(CategoryService);
 
-  readonly categories = toSignal(this.categoryService.getAll(), {
-    initialValue: []
-  });
+  private readonly categoryData = toSignal(
+    this.categoryService.getAll(),
+    { initialValue: [] }
+  );
+
+  readonly categories = linkedSignal(() => this.categoryData());
+
+  deleteCategory(id: number): void {
+    this.categoryService.delete(id).subscribe({
+      next: () => {
+        this.categories.update(categories =>
+          categories.filter(category => category.id !== id)
+        );
+      },
+      error: (err) => {
+        console.error('Kategori silinemedi:', err);
+      }
+    });
+  }
 }

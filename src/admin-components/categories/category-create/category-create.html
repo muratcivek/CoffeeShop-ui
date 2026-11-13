@@ -2,26 +2,31 @@
 
 <hr>
 
-<div class="card">
-  <div class="card-body">
+<form (ngSubmit)="onSubmit()">
 
-    <div class="mb-3">
-      <label class="form-label">Kategori Adı</label>
+  <div class="mb-3">
+    <label class="form-label">Kategori Adı</label>
 
-      <input
-        type="text"
-        class="form-control"
-        placeholder="Kategori adını giriniz">
-    </div>
-
-    <button type="button" class="btn btn-success me-2">
-      Kaydet
-    </button>
-
-    <a routerLink="/admin/categories"
-       class="btn btn-secondary">
-      İptal
-    </a>
-
+    <input
+      type="text"
+      name="name"
+      [(ngModel)]="category.name"
+      class="form-control"
+      placeholder="Kategori adını giriniz"
+      required>
   </div>
-</div>
+
+  <button
+    type="submit"
+    class="btn btn-success me-2"
+    [disabled]="isLoading">
+    {{ isLoading ? 'Kaydediliyor...' : 'Kaydet' }}
+  </button>
+
+  <a
+    routerLink="/admin/categories"
+    class="btn btn-secondary">
+    İptal
+  </a>
+
+</form>
