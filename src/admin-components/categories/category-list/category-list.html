@@ -24,11 +24,14 @@
             Sil
           </button>
 
+
           <a
-            [routerLink]="['/admin/categories/update', item.id]"
-            class="btn btn-outline-info">
+            class="btn btn-outline-info"
+            routerLink="/admin/categories/update"
+            [state]="{ category: item }">
             Güncelle
           </a>
+
         </td>
       </tr>
     } @empty {

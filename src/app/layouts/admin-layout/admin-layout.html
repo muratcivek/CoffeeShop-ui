@@ -1,4 +1,21 @@
 <div class="container-fluid">
+  <div class="d-flex justify-content-end align-items-center p-3 border-bottom">
+
+  @if (user; as currentUser) {
+    <div class="text-end">
+
+      <div class="fw-semibold">
+        Hoş geldiniz, {{ currentUser.userName }}
+      </div>
+
+      <small class="text-muted">
+        {{ currentUser.email }}
+      </small>
+
+    </div>
+  }
+
+  </div>
 
   <h2>CoffeeShop Admin Panel</h2>
 
@@ -18,7 +35,7 @@
     <a routerLink="/"
        class="btn btn-outline-secondary">
       Ana Sayfaya Dön
-    </a>
+  </a>
   </nav>
 
   <router-outlet></router-outlet>

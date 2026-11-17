@@ -1,8 +1,7 @@
 <h3>Kategori Güncelle</h3>
 
 <hr>
-
-@if (category.id) {
+@if (category; as model) {
 
   <form (ngSubmit)="onSubmit()">
 
@@ -12,7 +11,7 @@
       <input
         type="text"
         name="name"
-        [(ngModel)]="category.name"
+        [(ngModel)]="model.name"
         class="form-control"
         required>
     </div>
@@ -30,5 +29,5 @@
   </form>
 
 } @else {
-  <p>Kategori yükleniyor...</p>
+  <p>Kategori bulunamadı.</p>
 }

@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { Home } from '../ui-components/home/home';
 import { Menu } from '../ui-components/menu/menu';
+import { Login } from '../ui-components/login/login';
 import { UiLayout } from './layouts/ui-layout/ui-layout';
 import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { CategoryList } from '../admin-components/categories/category-list/category-list';
@@ -9,16 +10,21 @@ import { CategoryUpdate } from '../admin-components/categories/category-update/c
 
 export const routes: Routes = [
 
-  // UI Routes
-  {path: '', component:UiLayout,
-    children:
-      [
-        {path: '', component: Home},
-        {path: 'menu', component: Menu}
-      ]
+  // Login Routes
+  {
+    path: 'login',
+    component: Login
   },
 
-
+  // UI Routes
+  {
+    path: '',
+    component: UiLayout,
+    children: [
+      { path: '', component: Home },
+      { path: 'menu', component: Menu }
+    ]
+  },
 
   // Admin Routes
   {
@@ -27,8 +33,8 @@ export const routes: Routes = [
     children: [
       { path: 'categories', component: CategoryList },
       { path: 'categories/create', component: CategoryCreate },
-      { path: 'categories/update/:id', component: CategoryUpdate }
+      { path: 'categories/update', component: CategoryUpdate }
     ]
-  },
+  }
 
 ];

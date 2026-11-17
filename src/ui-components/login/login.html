@@ -1,0 +1,88 @@
+
+<div class="login-page">
+  <div class="login-card">
+
+    <div class="login-header">
+      <div class="login-icon">
+        <i class="bi bi-cup-hot"></i>
+      </div>
+
+      <h3>Hoş Geldiniz</h3>
+      <p>Coffee Shop Yönetim Paneli</p>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="alert alert-danger d-flex align-items-center gap-2"
+           role="alert">
+        <i class="bi bi-exclamation-circle"></i>
+        <span>{{ errorMessage() }}</span>
+      </div>
+    }
+
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+
+      <div class="mb-3">
+        <label for="username" class="form-label">
+          Kullanıcı Adı veya E-posta
+        </label>
+
+        <input
+          type="text"
+          id="username"
+          name="username"
+          class="form-control"
+          placeholder="Kullanıcı adınızı girin"
+          [(ngModel)]="userLogin.userNameOrEmail"
+          autocomplete="username"
+          required>
+      </div>
+
+      <div class="mb-4">
+        <label for="password" class="form-label">
+          Şifre
+        </label>
+
+        <div class="input-group">
+          <input
+            [type]="showPassword() ? 'text' : 'password'"
+            id="password"
+            name="password"
+            class="form-control"
+            placeholder="Şifrenizi girin"
+            [(ngModel)]="userLogin.password"
+            autocomplete="current-password"
+            required>
+
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            (click)="showPassword.set(!showPassword())">
+            <i [class]="showPassword()
+              ? 'bi bi-eye-slash'
+              : 'bi bi-eye'"></i>
+          </button>
+        </div>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary login-button w-100"
+        [disabled]="loginForm.invalid || isLoading()">
+
+        @if (isLoading()) {
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Giriş Yapılıyor...
+        } @else {
+          Giriş Yap
+        }
+
+      </button>
+
+    </form>
+
+    <div class="login-footer">
+      © Coffee Shop • Yönetim Paneli
+    </div>
+
+  </div>
+</div>

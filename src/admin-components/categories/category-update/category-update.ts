@@ -1,4 +1,5 @@
-import { Component, inject, Input, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Location } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { CategoryService } from '../../../Services/category-service';
@@ -10,36 +11,38 @@ import { Category } from '../../../app/models/category';
   templateUrl: './category-update.html',
   styleUrl: './category-update.css'
 })
-export class CategoryUpdate implements OnInit {
+export class CategoryUpdate {
 
-  @Input() id!: number;
+  private readonly categoryService = inject(CategoryService);
+  private readonly router = inject(Router);
+  private readonly location = inject(Location);
 
-  private categoryService = inject(CategoryService);
-  private router = inject(Router);
-  private cdr = inject(ChangeDetectorRef);
+category: Category | null = null;
 
-  category = {} as Category;
+constructor() {
+  const state = this.location.getState() as {
+    category?: Category;
+  };
 
-  ngOnInit(): void {
-    this.categoryService.getById(this.id).subscribe({
-      next: (value) => {
-        this.category = value;
-        this.cdr.detectChanges();
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+  if (!state.category) {
+    this.router.navigate(['/admin/categories']);
+    return;
   }
+
+  this.category = { ...state.category };
+}
+
 
   onSubmit(): void {
-    this.categoryService.update(this.category).subscribe({
-      next: () => {
-        this.router.navigate(['/admin/categories']);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
-  }
+  if (!this.category) return;
+
+  this.categoryService.update(this.category).subscribe({
+    next: () => {
+      this.router.navigate(['/admin/categories']);
+    },
+    error: (err) => {
+      console.error('Kategori güncellenemedi:', err);
+    }
+  });
+}
 }

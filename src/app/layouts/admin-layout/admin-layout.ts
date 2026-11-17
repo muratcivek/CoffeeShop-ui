@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   RouterLink,
   RouterLinkActive,
   RouterOutlet
 } from '@angular/router';
+import { AuthService } from '../../../Services/auth-service';
 
 @Component({
   selector: 'app-admin-layout',
@@ -17,5 +18,9 @@ import {
   styleUrl: './admin-layout.css'
 })
 export class AdminLayout {
+
+  private readonly authService = inject(AuthService);
+
+  readonly user = this.authService.getUser();
 
 }
