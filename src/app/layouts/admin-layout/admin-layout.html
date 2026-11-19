@@ -1,19 +1,28 @@
 <div class="container-fluid">
   <div class="d-flex justify-content-end align-items-center p-3 border-bottom">
 
-  @if (user; as currentUser) {
-    <div class="text-end">
+    @if (user; as currentUser) {
+      <div class="d-flex align-items-center gap-3">
 
-      <div class="fw-semibold">
-        Hoş geldiniz, {{ currentUser.userName }}
+        <div class="text-end">
+          <div class="fw-semibold">
+            Hoş geldiniz, {{ currentUser.userName }}
+          </div>
+
+          <small class="text-muted">
+            {{ currentUser.email }}
+          </small>
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-outline-danger btn-sm"
+          (click)="logout()">
+          Çıkış Yap
+      </button>
+
       </div>
-
-      <small class="text-muted">
-        {{ currentUser.email }}
-      </small>
-
-    </div>
-  }
+    }
 
   </div>
 
@@ -35,9 +44,8 @@
     <a routerLink="/"
        class="btn btn-outline-secondary">
       Ana Sayfaya Dön
-  </a>
+    </a>
   </nav>
 
   <router-outlet></router-outlet>
-
 </div>

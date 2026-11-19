@@ -7,6 +7,7 @@ import { AdminLayout } from './layouts/admin-layout/admin-layout';
 import { CategoryList } from '../admin-components/categories/category-list/category-list';
 import { CategoryCreate } from '../admin-components/categories/category-create/category-create';
 import { CategoryUpdate } from '../admin-components/categories/category-update/category-update';
+import { authGuard } from '../guards/auth-guard';
 
 export const routes: Routes = [
 
@@ -30,6 +31,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     component: AdminLayout,
+    canActivate: [authGuard],
     children: [
       { path: 'categories', component: CategoryList },
       { path: 'categories/create', component: CategoryCreate },
